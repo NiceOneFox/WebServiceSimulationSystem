@@ -5,6 +5,4 @@ namespace Bll.Domain.Services;
 public interface ISource
 {
     Request GetNewRequest();
-
-
 }

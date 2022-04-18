@@ -1,5 +1,5 @@
 ﻿using Bll.Domain.Factories;
-using Bll.Domain.Services;
+using Bll.Domain.Interfaces;
 
 namespace Bll.Domain.Entities;
 

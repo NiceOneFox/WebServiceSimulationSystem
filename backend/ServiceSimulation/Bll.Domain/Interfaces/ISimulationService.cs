@@ -1,6 +1,6 @@
 ﻿using Api.enums;
 
-namespace Bll.Domain.Services;
+namespace Bll.Domain.Interfaces;
 
 public interface ISimulationService
 {

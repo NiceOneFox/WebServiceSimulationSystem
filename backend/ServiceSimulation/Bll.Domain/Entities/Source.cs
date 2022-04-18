@@ -1,5 +1,4 @@
 ﻿using Bll.Domain.Interfaces;
-using Bll.Domain.Services;
 
 namespace Bll.Domain.Entities;
 

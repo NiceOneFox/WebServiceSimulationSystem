@@ -1,5 +1,5 @@
 ﻿using Api.enums;
-using Bll.Domain.Services;
+using Bll.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;

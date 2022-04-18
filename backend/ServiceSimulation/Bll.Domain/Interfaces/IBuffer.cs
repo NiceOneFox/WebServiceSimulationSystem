@@ -1,6 +1,6 @@
 ﻿using Bll.Domain.Entities;
 
-namespace Bll.Domain.Services;
+namespace Bll.Domain.Interfaces;
 
 public interface IBuffer
 {

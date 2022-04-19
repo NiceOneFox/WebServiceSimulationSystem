@@ -16,5 +16,5 @@ public class Request
     }
 
     public override string ToString()
-        => "Time: " + StartTime + " №source: " + NumberOfSource + "-" + SerialNumberOfSource;
+        => "Time: " + StartTime + " №sourceManager: " + NumberOfSource + "-" + SerialNumberOfSource;
 }

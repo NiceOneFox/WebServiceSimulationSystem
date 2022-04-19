@@ -1,19 +1,20 @@
 ﻿using Api.enums;
+using Bll.Domain.Entities;
 using Bll.Domain.Interfaces;
 
 namespace Bll.Domain.Services;
 
 public class SimulationService : ISimulationService
 {
-    private readonly ISource _source;
+    private readonly ISourceManager _sourceManager;
     private readonly IBuffer _buffer;
-    private readonly IDevice _device;
+    private readonly IDeviceManager _deviceManager;
 
-    public SimulationService(ISource source, IBuffer buffer, IDevice device)
+    public SimulationService(ISourceManager sourceManager, IBuffer buffer, IDeviceManager deviceManager)
     {
-        _source = source;
+        _sourceManager = sourceManager;
         _buffer = buffer;
-        _device = device;
+        _deviceManager = deviceManager;
     }
 
     public void StartSimulation(SimulationType simulationType)
@@ -21,7 +22,10 @@ public class SimulationService : ISimulationService
         // TODO CHOSE NUMBER OF SOURCES, SIZE OF BUFFER, NUMBER OF DEVICES.
 
         // TODO ALGORITHM OF CHOOSING REQUEST FROM SOURCE AND PUT IT ON DEVICE
-        var request =_source.GetNewRequest();
+        var source = new Source();
+        var device = new Device();
+
+        var request =_sourceManager.GetNewRequest(source);
 
         _buffer.Push(request);
 
@@ -29,7 +33,7 @@ public class SimulationService : ISimulationService
 
         if (requestFromBuffer == null) return;
 
-        _device.TakeRequest(requestFromBuffer);
+        _deviceManager.TakeRequest(requestFromBuffer, device);
 
         // TODO MAKE SOME KIND OF JSON ANSWER.
     }

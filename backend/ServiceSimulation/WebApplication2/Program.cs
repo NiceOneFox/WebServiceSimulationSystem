@@ -17,8 +17,8 @@ builder.Services.AddTransient<ITimeProvider, TimeProvider>();
 builder.Services.AddTransient<IBuffer, Buffer>();
 builder.Services.AddTransient<IBufferManager, StandardBufferManager>();
 builder.Services.AddTransient<IBufferManagerFactory, BufferManagerFactory>();
-builder.Services.AddTransient<IDevice, Device>();
-builder.Services.AddTransient<ISource, Source>();
+builder.Services.AddTransient<IDeviceManager, DeviceManager>();
+builder.Services.AddTransient<ISourceManager, SourceManager>();
 
 #endregion
 

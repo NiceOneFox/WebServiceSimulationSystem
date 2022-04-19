@@ -2,7 +2,6 @@ using Bll.Domain.Entities;
 using Bll.Domain.Factories;
 using Bll.Domain.Interfaces;
 using Bll.Domain.Services;
-using Buffer = Bll.Domain.Entities.Buffer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +13,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<ISimulationService, SimulationService>();
 
 builder.Services.AddTransient<ITimeProvider, TimeProvider>();
-builder.Services.AddTransient<IBuffer, Buffer>();
 builder.Services.AddTransient<IBufferManager, StandardBufferManager>();
 builder.Services.AddTransient<IBufferManagerFactory, BufferManagerFactory>();
 builder.Services.AddTransient<IDeviceManager, DeviceManager>();

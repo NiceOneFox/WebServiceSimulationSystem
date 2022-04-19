@@ -1,5 +1,6 @@
 ﻿using Api.enums;
 using Bll.Domain.Entities;
+using Bll.Domain.Factories;
 using Bll.Domain.Interfaces;
 
 namespace Bll.Domain.Services;
@@ -7,14 +8,14 @@ namespace Bll.Domain.Services;
 public class SimulationService : ISimulationService
 {
     private readonly ISourceManager _sourceManager;
-    private readonly IBuffer _buffer;
     private readonly IDeviceManager _deviceManager;
+    private readonly IBufferManagerFactory _bufferManagerFactory;
 
-    public SimulationService(ISourceManager sourceManager, IBuffer buffer, IDeviceManager deviceManager)
+    public SimulationService(ISourceManager sourceManager, IDeviceManager deviceManager, IBufferManagerFactory bufferManagerFactory)
     {
         _sourceManager = sourceManager;
-        _buffer = buffer;
         _deviceManager = deviceManager;
+        _bufferManagerFactory = bufferManagerFactory;
     }
 
     public void StartSimulation(SimulationType simulationType)
@@ -25,11 +26,13 @@ public class SimulationService : ISimulationService
         var source = new Source();
         var device = new Device();
 
+        var bufferManager = _bufferManagerFactory.CreateBufferManager(simulationType);
+
         var request =_sourceManager.GetNewRequest(source);
 
-        _buffer.Push(request);
+        bufferManager.Add(request);
 
-        var requestFromBuffer = _buffer.Pop();
+        var requestFromBuffer = bufferManager.Get();
 
         if (requestFromBuffer == null) return;
 

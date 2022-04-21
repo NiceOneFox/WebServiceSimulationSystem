@@ -12,7 +12,7 @@ public class SourceManager : ISourceManager
 
     public Request GetNewRequest(Source source)
     {
-        var generatedRequest = new Request(source.SourceId, source.SerialNumber, Time.Now, DateTime.Now.AddMilliseconds(5.0));
+        var generatedRequest = new Request(source.SourceId, source.SerialNumber, Time.Now, Time.Now + 0.11);
         source.SerialNumber++;
         return generatedRequest;
     }

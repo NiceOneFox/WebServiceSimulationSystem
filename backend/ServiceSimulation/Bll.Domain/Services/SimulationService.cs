@@ -18,7 +18,7 @@ public class SimulationService : ISimulationService
         _bufferManagerFactory = bufferManagerFactory;
     }
 
-    public void StartSimulation(SimulationType simulationType)
+    public void StartSimulation(InputParameters parameters)
     {
         // TODO CHOSE NUMBER OF SOURCES, SIZE OF BUFFER, NUMBER OF DEVICES.
 
@@ -26,7 +26,7 @@ public class SimulationService : ISimulationService
         var source = new Source();
         var device = new Device();
 
-        var bufferManager = _bufferManagerFactory.CreateBufferManager(simulationType);
+        var bufferManager = _bufferManagerFactory.CreateBufferManager(parameters.SimulationType);
 
         var request =_sourceManager.GetNewRequest(source);
 

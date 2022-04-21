@@ -1,4 +1,5 @@
 ﻿using Api.enums;
+using Bll.Domain.Entities;
 using Bll.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,9 +16,9 @@ public class Simulation : Controller
     }
 
     [HttpGet("/start")]
-    public IActionResult Start(SimulationType simulationType)
+    public IActionResult Start(InputParameters parameters)
     {
-        _simulationService.StartSimulation(simulationType);
+        _simulationService.StartSimulation(parameters);
         return Ok("Simulation answer");
     }
 }

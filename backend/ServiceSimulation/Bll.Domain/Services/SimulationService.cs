@@ -10,6 +10,7 @@ public class SimulationService : ISimulationService
     private readonly ISourceManager _sourceManager;
     private readonly IDeviceManager _deviceManager;
     private readonly IBufferManagerFactory _bufferManagerFactory;
+    private readonly IResults _results;
 
     public SimulationService(ISourceManager sourceManager, IDeviceManager deviceManager, IBufferManagerFactory bufferManagerFactory)
     {
@@ -21,12 +22,19 @@ public class SimulationService : ISimulationService
     public void StartSimulation(InputParameters parameters)
     {
         // TODO ALGORITHM OF CHOOSING REQUEST FROM SOURCE AND PUT IT ON DEVICE
-        var source = new Source();
-        var device = new Device();
-
+        List<Source> sources = new List<Source>(parameters.NumberOfSources);
+        List<Device> devices = new List<Device>(parameters.NumberOfDevices);
         var bufferManager = _bufferManagerFactory.CreateBufferManager(parameters.SimulationType);
 
-        var request =_sourceManager.GetNewRequest(source);
+        while (_results.AmountOfServedRequest != parameters.AmountOfRequests &&
+               !bufferManager.IsFree() &&
+               !IsAllDevicesFree(devices))
+        {
+            // TODO CHECK FOR NEXT SPECIAL EVENT
+            // TODO FIND OUT HOW TO CHECK NEXT TIME FOR REQUEST AND DEVICE.
+        }
+       
+        var request =_sourceManager.GetNewRequest(sources.FirstOrDefault());
 
         bufferManager.Add(request);
 
@@ -34,6 +42,10 @@ public class SimulationService : ISimulationService
 
         if (requestFromBuffer == null) return;
 
-        _deviceManager.TakeRequest(requestFromBuffer, device);
+        _deviceManager.TakeRequest(requestFromBuffer, devices.FirstOrDefault());
     }
+
+    public bool IsAllDevicesFree(List<Device> devices) =>
+        devices.Any(d => d.IsWorking);
+
 }

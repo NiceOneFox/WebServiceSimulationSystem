@@ -46,4 +46,5 @@ public class StandardBufferManager : IBufferManager
         return requestFromBuffer;
     }
 
+    public bool IsFree() => _requests.Count == 0;
 }

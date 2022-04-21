@@ -5,4 +5,5 @@ namespace Bll.Domain.Interfaces;
 public interface ISourceManager
 {
     Request GetNewRequest(Source source);
+    public double TimeOfNextRequest { get; set; }
 }

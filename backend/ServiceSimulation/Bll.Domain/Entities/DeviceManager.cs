@@ -28,7 +28,6 @@ public class DeviceManager : IDeviceManager
         device.Request = request;
 
         TimeOfDeviceWillBeFree = _time.Now +(-1.0 / Lambda) * Math.Log(_random.NextDouble());
-        //TODO COUNT TIME OF WORKING ON THAT REQUEST
     }
 
     public bool FreeDevice(Device device)
@@ -37,10 +36,10 @@ public class DeviceManager : IDeviceManager
         {
             device.Request.EndTime = _time.Now;
 
+            _resultChannel.Processed.Add(device.Request);
+
             device.Request = null;
             device.IsWorking = false;
-
-            // TODO COUNT THAT REQUEST WHICH IS END WORKING.
         }
         return true;
     }

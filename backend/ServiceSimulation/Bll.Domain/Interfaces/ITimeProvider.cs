@@ -2,5 +2,5 @@
 
 public interface ITimeProvider
 {
-    DateTime Now { get; }
+    double Now { get; set; }
 }

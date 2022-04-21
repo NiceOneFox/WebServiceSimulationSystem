@@ -10,15 +10,19 @@ public class Simulation : Controller
 {
     private readonly ISimulationService _simulationService;
 
-    public Simulation(ISimulationService simulationService)
+    private readonly ITimeProvider _time;
+
+    public Simulation(ISimulationService simulationService, ITimeProvider time)
     {
         _simulationService = simulationService;
+        _time = time;
     }
 
     [HttpGet("/start")]
     public IActionResult Start(InputParameters parameters)
     {
+        _time.Now = 0.4;
         _simulationService.StartSimulation(parameters);
-        return Ok("Simulation answer");
+        return Ok($"Simulation answer: Time: {_time.Now}");
     }
 }

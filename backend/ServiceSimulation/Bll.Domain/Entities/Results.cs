@@ -1,9 +1,10 @@
-﻿namespace Bll.Domain.Entities;
+﻿using Bll.Domain.Interfaces;
 
-public class Results
+namespace Bll.Domain.Entities;
+
+public class Results : IResults
 {
-    public List<Request> Cancelled = new();
-
-    public List<Request> Processed = new();
+    public List<Request> Cancelled { get; set; } = new();
+    public List<Request> Processed { get; set; } = new();
     public double ModelingTime { get; set; }
 }

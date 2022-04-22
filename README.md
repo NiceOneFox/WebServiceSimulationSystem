@@ -11,5 +11,5 @@ Project aim is build service simulation system that has flow of requests which a
 N-Layer Web API
 
 ## Used Design Patterns
-1. Factory Pattern (Concrete implementation chose by input parameter and provided by IoC)
+1. Factory Pattern (Concrete implementation chosen by input parameter and provided by IoC)
 2. Dependency Injection (DI)

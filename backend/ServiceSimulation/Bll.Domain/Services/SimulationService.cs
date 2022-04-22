@@ -88,7 +88,7 @@ public class SimulationService : ISimulationService
                 _deviceManager.FreeDevice(devices[indexOfDeviceWithClosestTimeFree]);
 
                 // Take from buffer and put on device.
-                _deviceManager.TakeRequest(bufferManager.Get(), devices[indexOfDeviceWithClosestTimeFree]));
+                _deviceManager.TakeRequest(bufferManager.Get(), devices[indexOfDeviceWithClosestTimeFree]);
             }
             else
             {

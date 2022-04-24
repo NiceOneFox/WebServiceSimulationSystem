@@ -20,7 +20,6 @@ public class StandardBufferManager : IBufferManager
 
     public void Add(Request request)
     {
-        _time.Now = 0.6;
         if (_requests.Count >= Capacity)
         {
             var removedRequest = _requests.Last();
@@ -33,12 +32,9 @@ public class StandardBufferManager : IBufferManager
         _requests.AddFirst(request);
     }
 
-    public Request? Get()
+    public Request Get()
     {
-        if (_requests.Count == 0)
-        {
-            return null; // TODO THROW EXCEPTION?
-        }
+        if (IsFree()) throw new ArgumentNullException("Buffer was empty"); // TODO template string for Ex
 
         var requestFromBuffer = _requests.Last();
         _requests.RemoveLast();
@@ -46,4 +42,5 @@ public class StandardBufferManager : IBufferManager
         return requestFromBuffer;
     }
 
+    public bool IsFree() => _requests.Count == 0;
 }

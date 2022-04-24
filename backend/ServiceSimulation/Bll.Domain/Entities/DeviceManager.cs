@@ -10,9 +10,6 @@ public class DeviceManager : IDeviceManager
 
     private static readonly Random _random = new();
 
-    public double Lambda { get; set; }
-    public double TimeOfDeviceWillBeFree { get; set; }
-
     public DeviceManager(ITimeProvider time, IResults resultChannel)
     {
         _time = time;
@@ -26,22 +23,23 @@ public class DeviceManager : IDeviceManager
             return;
         }
         device.Request = request;
+        device.IsWorking = true;
 
-        TimeOfDeviceWillBeFree = _time.Now +(-1.0 / Lambda) * Math.Log(_random.NextDouble());
-        //TODO COUNT TIME OF WORKING ON THAT REQUEST
+        device.TimeOfDeviceWillBeFree = _time.Now + (-1.0 / device.Lambda) * Math.Log(_random.NextDouble());
     }
 
     public bool FreeDevice(Device device)
     {
-        if (TimeOfDeviceWillBeFree <= _time.Now)
-        {
-            device.Request.EndTime = _time.Now;
+        device.Request.EndTime = _time.Now;
 
-            device.Request = null;
-            device.IsWorking = false;
+        _time.Now = device.Request.EndTime;
 
-            // TODO COUNT THAT REQUEST WHICH IS END WORKING.
-        }
+        _resultChannel.Processed.Add(device.Request);
+
+
+        device.Request = null;
+        device.IsWorking = false;
+
         return true;
     }
 }

@@ -9,20 +9,21 @@ namespace Api.Controllers;
 public class Simulation : Controller
 {
     private readonly ISimulationService _simulationService;
-
     private readonly ITimeProvider _time;
+    private readonly IResults _results;
 
-    public Simulation(ISimulationService simulationService, ITimeProvider time)
+    public Simulation(ISimulationService simulationService, ITimeProvider time, IResults results)
     {
         _simulationService = simulationService;
         _time = time;
+        _results = results;
     }
 
     [HttpGet("/start")]
     public IActionResult Start(InputParameters parameters)
     {
-        _time.Now = 0.4;
         _simulationService.StartSimulation(parameters);
-        return Ok($"Simulation answer: Time: {_time.Now}");
+        _results.ModelingTime = _time.Now; // TODO Add AutoMapper
+        return Ok(_results);
     }
 }

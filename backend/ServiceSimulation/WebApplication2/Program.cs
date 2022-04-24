@@ -13,11 +13,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<ISimulationService, SimulationService>();
 
 builder.Services.AddScoped<ITimeProvider, TimeProvider>();
+builder.Services.AddScoped<IResults, Bll.Domain.Entities.Results>();
 //builder.Services.AddTransient<IBufferManager, StandardBufferManager>();
 builder.Services.AddTransient<IBufferManagerFactory, BufferManagerFactory>();
 builder.Services.AddTransient<IDeviceManager, DeviceManager>();
 builder.Services.AddTransient<ISourceManager, SourceManager>();
-builder.Services.AddTransient<IResults, Bll.Domain.Entities.Results>();
+
 
 builder.Services.AddScoped<StandardBufferManager>()
     .AddScoped<IBufferManager, StandardBufferManager>(s => s.GetService<StandardBufferManager>());

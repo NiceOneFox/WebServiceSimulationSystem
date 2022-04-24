@@ -4,7 +4,9 @@ namespace Bll.Domain.Interfaces;
 
 public interface IResults
 {
-    public List<Request> Cancelled { get; set; }
-    public List<Request> Processed { get; set; }
+    List<Request> Cancelled { get; set; }
+    List<Request> Processed { get; set; }
     double ModelingTime { get; set; }
+    int AmountOfGeneratedRequests { get; set; }
+    int AmountOfServedRequest { get; set; }
 }

@@ -5,6 +5,6 @@ namespace Bll.Domain.Interfaces;
 public interface IBufferManager
 {
     void Add(Request request);
-    Request? Get();
+    Request Get();
     bool IsFree();
 }

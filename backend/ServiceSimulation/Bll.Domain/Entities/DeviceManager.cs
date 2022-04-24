@@ -23,6 +23,7 @@ public class DeviceManager : IDeviceManager
             return;
         }
         device.Request = request;
+        device.IsWorking = true;
 
         device.TimeOfDeviceWillBeFree = _time.Now + (-1.0 / device.Lambda) * Math.Log(_random.NextDouble());
     }

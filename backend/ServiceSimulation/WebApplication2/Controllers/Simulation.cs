@@ -22,8 +22,8 @@ public class Simulation : Controller
     [HttpGet("/start")]
     public IActionResult Start(InputParameters parameters)
     {
-        _time.Now = 0.4;
         _simulationService.StartSimulation(parameters);
-        return Ok($"Simulation answer: Time: {_time.Now}");
+        _results.ModelingTime = _time.Now; // TODO Add AutoMapper
+        return Ok(_results);
     }
 }

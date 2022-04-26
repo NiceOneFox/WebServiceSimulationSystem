@@ -1,3 +1,4 @@
+using Api.Configuration;
 using Bll.Domain.Entities;
 using Bll.Domain.Factories;
 using Bll.Domain.Interfaces;
@@ -14,16 +15,20 @@ builder.Services.AddTransient<ISimulationService, SimulationService>();
 
 builder.Services.AddScoped<ITimeProvider, TimeProvider>();
 builder.Services.AddScoped<IResults, Bll.Domain.Entities.Results>();
+builder.Services.AddScoped<IResultManager, ResultManager>();
+builder.Services.AddScoped<IResultManager, ResultManager>();
 //builder.Services.AddTransient<IBufferManager, StandardBufferManager>();
 builder.Services.AddTransient<IBufferManagerFactory, BufferManagerFactory>();
 builder.Services.AddTransient<IDeviceManager, DeviceManager>();
 builder.Services.AddTransient<ISourceManager, SourceManager>();
+//builder.Services.AddScoped<StandardBufferManager>()
+//    .AddScoped<IBufferManager, StandardBufferManager>(s => s.GetRequiredService<StandardBufferManager>());
 
-
-builder.Services.AddScoped<StandardBufferManager>()
-    .AddScoped<IBufferManager, StandardBufferManager>(s => s.GetService<StandardBufferManager>());
-
+//builder.Services.AddScoped<IBufferManager>(s =>
+//    ActivatorUtilities.CreateInstance<StandardBufferManager>(s));
 #endregion
+
+builder.Services.AddMapper();
 
 var app = builder.Build();
 

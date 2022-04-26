@@ -16,8 +16,9 @@ public class Simulation : Controller
     private readonly IResultManager _resultManager;
     private readonly IMapper _mapper;
     public Simulation(ISimulationService simulationService, 
-        ITimeProvider time, IResults results, 
-        IResultManager resultManager, 
+        ITimeProvider time, 
+        IResults results,
+        IResultManager resultManager,
         IMapper mapper)
     {
         _simulationService = simulationService;
@@ -32,7 +33,8 @@ public class Simulation : Controller
     {
         _simulationService.StartSimulation(parameters);
         var endResultsOfModeling = _resultManager.CalculateResultsOfModeling();
-        var apiResults = _mapper.Map<ApiResults>((endResultsOfModeling, _results)); // TODO OTHER PARAMS>?
-        return Ok(apiResults); // TODO AUTOMAPPER CONFIGURATION!
+        var apiResults = _mapper.Map<ApiResults>((endResultsOfModeling, _results));
+
+        return Ok(apiResults);
     }
 }

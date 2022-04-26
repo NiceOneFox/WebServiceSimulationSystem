@@ -15,7 +15,11 @@ public class Simulation : Controller
     private readonly IResults _results;
     private readonly IResultManager _resultManager;
     private readonly IMapper _mapper;
-    public Simulation(ISimulationService simulationService, ITimeProvider time, IResults results, IResultManager resultManager, IMapper mapper)
+    public Simulation(ISimulationService simulationService, 
+        ITimeProvider time, 
+        IResults results,
+        IResultManager resultManager,
+        IMapper mapper)
     {
         _simulationService = simulationService;
         _time = time;

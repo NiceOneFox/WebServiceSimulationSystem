@@ -7,6 +7,23 @@ Special events are:
 * time of free device,
 * end of modeling.
 
+Results of moddeling represented by:
+* Modeling time
+* Amount of Generated requests
+* Amount of Served requests
+* Average probability of Maintenance ( P = N served / N total )
+* Bandwidth of System ( A = N served / T modeling )
+* Probability of Failure ( P failire of request = N declined / N total )
+
+Input parameters:
+* Number of Sources
+* Number of Devices
+* Buffer capacity
+* Amount of requests
+* Modeling time (max time)
+* SimulationType (Type of buffer modeling, FIFO, LIFO etc.)
+* Lambda (amount of flow) parameter for Poissonian flow
+
 ## Technologies
 - ASP .NET 6
 - C# 10

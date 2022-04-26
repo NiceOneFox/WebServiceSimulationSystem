@@ -4,18 +4,19 @@ namespace Bll.Domain.Entities;
 
 public class StandardBufferManager : IBufferManager
 {
-   private readonly IResults _resultChannel;
+    private readonly IResults _resultChannel;
 
-   private readonly ITimeProvider _time;
+    private readonly ITimeProvider _time;
 
     private readonly LinkedList<Request> _requests = new();
 
-    public const int Capacity = 5;
+    public int Capacity = 4;
 
-    public StandardBufferManager(IResults resultChannel, ITimeProvider time)
+    public StandardBufferManager(IResults resultChannel, ITimeProvider time, int capacity)
     {
         _resultChannel = resultChannel;
         _time = time;
+        Capacity = capacity;
     }
 
     public void Add(Request request)

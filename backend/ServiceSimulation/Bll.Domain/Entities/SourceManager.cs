@@ -29,4 +29,4 @@ public class SourceManager : ISourceManager
 
         return generatedRequest;
     }
-}
+} // TODO Add Method Take NewRequest And GetTimeOfNextRequest ?

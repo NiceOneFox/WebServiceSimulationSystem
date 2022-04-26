@@ -29,7 +29,8 @@ public class Simulation : Controller
     {
         _simulationService.StartSimulation(parameters);
         var endResultsOfModeling = _resultManager.CalculateResultsOfModeling();
-        var apiResults = _mapper.Map<ApiResults>((endResultsOfModeling, _results)); // TODO OTHER PARAMS>?
-        return Ok(apiResults); // TODO AUTOMAPPER CONFIGURATION!
+        var apiResults = _mapper.Map<ApiResults>((endResultsOfModeling, _results));
+
+        return Ok(apiResults);
     }
 }

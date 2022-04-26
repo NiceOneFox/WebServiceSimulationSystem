@@ -15,19 +15,12 @@ public class BufferManagerFactory : IBufferManagerFactory
         _serviceProvider = serviceProvider;
     }
 
-    public IBufferManager CreateBufferManager(SimulationType simulationType) // TODO PASS MORE PARAMETERS. SIZE BUFFER
+    public IBufferManager CreateBufferManager(SimulationType simulationType, int capacity)
     {
-       // var a = ActivatorUtilities.CreateInstance<IBufferManager>(_serviceProvider, 
-       //     new StandardBufferManager(_serviceProvider.GetRequiredService<IResults>(),
-        //        _serviceProvider.GetRequiredService<ITimeProvider>(), 5));
-        
         return simulationType switch
         {
-            0 => new StandardBufferManager(_serviceProvider.GetRequiredService<IResults>(), _serviceProvider.GetRequiredService<ITimeProvider>(), 5),
-            //0 => (IBufferManager)_serviceProvider.GetRequiredService(typeof(StandardBufferManager)),
-            //0 => Activator.CreateInstance<IBufferManager>(nameof(StandardBufferManager), 5),// (IBufferManager)_serviceProvider.GetService(typeof(StandardBufferManager)),
-            // 0 => ActivatorUtilities.CreateInstance<IBufferManager>(_serviceProvider,
-            //    new StandardBufferManager(_serviceProvider.GetRequiredService<IResults>(), _serviceProvider.GetRequiredService<ITimeProvider>())),
+            0 => new StandardBufferManager(_serviceProvider.GetRequiredService<IResults>(),
+                _serviceProvider.GetRequiredService<ITimeProvider>(), capacity),
             _ => throw new NotImplementedException()
         };
     }

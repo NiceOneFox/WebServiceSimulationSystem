@@ -1,4 +1,6 @@
-﻿namespace Bll.Domain.Interfaces;
+﻿using Bll.Domain.Entities;
+
+namespace Bll.Domain.Interfaces;
 
 public interface IResultManager
 {
@@ -16,4 +18,5 @@ public interface IResultManager
     /// P failire of request = N declined / N total
     /// </summary>
     double ProbabilityOfFailure(int amountOfDeclinedRequests, int totalAmountOfRequests);
+    public FinalResults CalculateResultsOfModeling();
 }

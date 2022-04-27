@@ -24,6 +24,10 @@ builder.Services.AddTransient<ISourceManager, SourceManager>();
 #endregion
 
 builder.Services.AddMapper();
+builder.Services.AddCors(opts =>
+{
+    opts.AddPolicy(CorsPolicies.AllowRemoteFrontendWithCredentials);
+});
 
 var app = builder.Build();
 

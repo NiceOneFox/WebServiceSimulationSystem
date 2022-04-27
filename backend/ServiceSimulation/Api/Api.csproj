@@ -16,6 +16,7 @@
     <Folder Include="Controllers\" />
     <Folder Include="Entities\" />
     <Folder Include="Configuration\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 
   <ItemGroup>

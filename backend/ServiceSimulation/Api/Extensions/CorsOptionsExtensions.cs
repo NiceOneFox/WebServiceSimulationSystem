@@ -1,6 +1,12 @@
-﻿namespace Api.Extensions;
+﻿using Microsoft.AspNetCore.Cors.Infrastructure;
 
-public class CorsOptionsExtensions
+namespace Api.Extensions;
+
+public static class CorsOptionsExtensions
 {
-    
+    public static void AddPolicy(this CorsOptions options, (string Name, Action<CorsPolicyBuilder> ConfigurePolicy) arg)
+    {
+        options.AddPolicy(arg.Name, arg.ConfigurePolicy);
+    }
+
 }

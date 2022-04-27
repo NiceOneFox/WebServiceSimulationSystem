@@ -1,7 +1,6 @@
 ﻿using Api.enums;
 using Bll.Domain.Factories;
 using Bll.Domain.Interfaces;
-using Castle.DynamicProxy;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Bll.Domain.Entities;

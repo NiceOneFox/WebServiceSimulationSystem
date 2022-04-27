@@ -30,7 +30,7 @@ public class DeviceManager : IDeviceManager
 
     public bool FreeDevice(Device device)
     {
-        _ = device ?? throw new ArgumentNullException(nameof(device));
+        _ = device.Request ?? throw new ArgumentNullException(nameof(device));
         device.Request.EndTime = _time.Now;
 
         _time.Now = device.Request.EndTime;

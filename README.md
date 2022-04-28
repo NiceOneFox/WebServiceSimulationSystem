@@ -28,6 +28,7 @@ Input parameters:
 - ASP .NET 6
 - C# 10
 - AutoMapper
+- CORS
 
 ## Architecture 
 N-Layer Web API

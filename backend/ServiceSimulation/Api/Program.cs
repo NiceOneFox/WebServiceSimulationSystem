@@ -3,12 +3,16 @@ using Api.Extensions;
 using Bll.Domain.Entities;
 using Bll.Domain.Factories;
 using Bll.Domain.Interfaces;
-using Bll.Domain.Models;
 using Bll.Domain.Services;
+using FluentValidation.AspNetCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation(fv =>
+{
+    fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -36,6 +40,7 @@ builder.Services.AddCors(opts =>
     opts.AddPolicy(CorsPolicies.AllowRemoteFrontendWithCredentials);
 });
 #endregion
+
 
 var app = builder.Build();
 

@@ -29,6 +29,7 @@ Input parameters:
 - ASP .NET 6
 - C# 10
 - AutoMapper
+- FluentValidation
 - CORS
 ### For testing
 - NUnit

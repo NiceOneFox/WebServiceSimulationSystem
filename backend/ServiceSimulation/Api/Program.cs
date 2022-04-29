@@ -2,6 +2,7 @@ using Api.Configuration;
 using Bll.Domain.Entities;
 using Bll.Domain.Factories;
 using Bll.Domain.Interfaces;
+using Bll.Domain.Models;
 using Bll.Domain.Services;
 
 var builder = WebApplication.CreateBuilder(args);

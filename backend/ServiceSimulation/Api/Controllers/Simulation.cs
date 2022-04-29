@@ -1,8 +1,7 @@
 ﻿using Api.Entities;
-using Api.enums;
 using AutoMapper;
-using Bll.Domain.Entities;
 using Bll.Domain.Interfaces;
+using Bll.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;

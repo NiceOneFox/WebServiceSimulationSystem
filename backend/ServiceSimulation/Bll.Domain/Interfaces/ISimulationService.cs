@@ -1,5 +1,4 @@
-﻿using Api.enums;
-using Bll.Domain.Entities;
+﻿using Bll.Domain.Models;
 
 namespace Bll.Domain.Interfaces;
 

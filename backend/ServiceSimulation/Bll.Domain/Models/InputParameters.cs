@@ -1,6 +1,6 @@
 ﻿using Api.enums;
 
-namespace Bll.Domain.Entities;
+namespace Bll.Domain.Models;
 
 public class InputParameters
 {

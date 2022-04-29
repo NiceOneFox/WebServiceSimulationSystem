@@ -1,5 +1,4 @@
-﻿using Api.enums;
-using Bll.Domain.Entities;
+﻿using Bll.Domain.Models;
 using Bll.Domain.Factories;
 using Bll.Domain.Interfaces;
 
@@ -27,6 +26,7 @@ public class SimulationService : ISimulationService
 
     public void StartSimulation(InputParameters parameters)
     {
+        #region initialize
         var sources = new List<Source>(parameters.NumberOfSources);
         var devices = new List<Device>(parameters.NumberOfDevices);
 
@@ -60,6 +60,7 @@ public class SimulationService : ISimulationService
         {
             _sourceManager.GetNewRequest(source);
         }
+        #endregion
 
         while (true)
         {

@@ -36,7 +36,7 @@ public class SimulationService : ISimulationService
             {
                 SourceId = i,
                 SerialNumber = 0,
-                Lambda = parameters.Lambda,
+                Lambda = parameters.LambdaForRequests,
                 Priority = 1,
                 TimeOfNextRequest = 0,
             });
@@ -48,7 +48,7 @@ public class SimulationService : ISimulationService
             {
                 DeviceId = i,
                 IsWorking = false,
-                Lambda = parameters.Lambda,
+                Lambda = parameters.LambdaForDevice,
                 Request = null,
                 TimeOfDeviceWillBeFree = 0,
             });

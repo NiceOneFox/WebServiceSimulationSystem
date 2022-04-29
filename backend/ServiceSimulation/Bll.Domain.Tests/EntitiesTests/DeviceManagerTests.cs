@@ -34,7 +34,7 @@ namespace Bll.Domain.Tests.EntitiesTests
             double expectedTimeOfDeviceWillBeFree = 0.45d;
             _flow.Setup(f => f.GetInterval(_time.Object.Now, lambda)).Returns(expectedTimeOfDeviceWillBeFree);
 
-            var request = new Request(2, 15, 0.325555d, 0.0d);
+            var request = new Request(2, 15, 0.325555d, null);
             var device = new Device()
             {
                 DeviceId = 4,

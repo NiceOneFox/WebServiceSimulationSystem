@@ -33,12 +33,11 @@ public class DeviceManager : IDeviceManager
     public bool FreeDevice(Device device)
     {
         _ = device.Request ?? throw new ArgumentNullException(nameof(device));
+
+        _time.Now = device.TimeOfDeviceWillBeFree;
         device.Request.EndTime = _time.Now;
 
-        _time.Now = device.Request.EndTime;
-
         _results.Processed.Add(device.Request);
-
 
         device.Request = null;
         device.IsWorking = false;

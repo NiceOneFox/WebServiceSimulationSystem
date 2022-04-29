@@ -1,4 +1,5 @@
 using Api.Configuration;
+using Api.Extensions;
 using Bll.Domain.Entities;
 using Bll.Domain.Factories;
 using Bll.Domain.Interfaces;
@@ -25,7 +26,16 @@ builder.Services.AddTransient<IDeviceManager, DeviceManager>();
 builder.Services.AddTransient<ISourceManager, SourceManager>();
 #endregion
 
+#region Mapper
 builder.Services.AddMapper();
+#endregion
+
+#region CORS
+builder.Services.AddCors(opts =>
+{
+    opts.AddPolicy(CorsPolicies.AllowRemoteFrontendWithCredentials);
+});
+#endregion
 
 var app = builder.Build();
 

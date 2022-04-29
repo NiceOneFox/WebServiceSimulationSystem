@@ -7,13 +7,14 @@ public class DeviceManager : IDeviceManager
 {
     private readonly ITimeProvider _time;
 
+    private readonly IFlowProvider _flow;
+
     private readonly IResults _results;
 
-    private static readonly Random _random = new();
-
-    public DeviceManager(ITimeProvider time, IResults results)
+    public DeviceManager(ITimeProvider time, IFlowProvider flowProvider, IResults results)
     {
         _time = time;
+        _flow = flowProvider;
         _results = results;
     }
 
@@ -26,12 +27,12 @@ public class DeviceManager : IDeviceManager
         device.Request = request;
         device.IsWorking = true;
 
-        device.TimeOfDeviceWillBeFree = _time.Now + (-1.0 / device.Lambda) * Math.Log(_random.NextDouble());
+        device.TimeOfDeviceWillBeFree = _flow.GetInterval(_time.Now, device.Lambda);
     }
 
     public bool FreeDevice(Device device)
     {
-        _ = device ?? throw new ArgumentNullException(nameof(device));
+        _ = device.Request ?? throw new ArgumentNullException(nameof(device));
         device.Request.EndTime = _time.Now;
 
         _time.Now = device.Request.EndTime;

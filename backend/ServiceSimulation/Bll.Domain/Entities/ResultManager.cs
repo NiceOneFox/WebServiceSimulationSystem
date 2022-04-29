@@ -1,4 +1,5 @@
 ﻿using Bll.Domain.Interfaces;
+using Bll.Domain.Models;
 
 namespace Bll.Domain.Entities;
 
@@ -6,7 +7,6 @@ public class ResultManager : IResultManager
 {
     private readonly IResults _results;
     private readonly ITimeProvider _timeProvider;
-
     public ResultManager(IResults results, ITimeProvider timeProvider)
     {
         _results = results;

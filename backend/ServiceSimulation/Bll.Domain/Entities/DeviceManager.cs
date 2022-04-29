@@ -1,4 +1,5 @@
 ﻿using Bll.Domain.Interfaces;
+using Bll.Domain.Models;
 
 namespace Bll.Domain.Entities;
 
@@ -6,14 +7,15 @@ public class DeviceManager : IDeviceManager
 {
     private readonly ITimeProvider _time;
 
-    private readonly IResults _resultChannel;
+    private readonly IFlowProvider _flow;
 
-    private static readonly Random _random = new();
+    private readonly IResults _results;
 
-    public DeviceManager(ITimeProvider time, IResults resultChannel)
+    public DeviceManager(ITimeProvider time, IFlowProvider flowProvider, IResults results)
     {
         _time = time;
-        _resultChannel = resultChannel;
+        _flow = flowProvider;
+        _results = results;
     }
 
     public void TakeRequest(Request request, Device device)
@@ -25,7 +27,7 @@ public class DeviceManager : IDeviceManager
         device.Request = request;
         device.IsWorking = true;
 
-        device.TimeOfDeviceWillBeFree = _time.Now + (-1.0 / device.Lambda) * Math.Log(_random.NextDouble());
+        device.TimeOfDeviceWillBeFree = _flow.GetInterval(_time.Now, device.Lambda);
     }
 
     public bool FreeDevice(Device device)
@@ -35,7 +37,7 @@ public class DeviceManager : IDeviceManager
 
         _time.Now = device.Request.EndTime;
 
-        _resultChannel.Processed.Add(device.Request);
+        _results.Processed.Add(device.Request);
 
 
         device.Request = null;

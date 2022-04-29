@@ -1,4 +1,5 @@
 ﻿using Bll.Domain.Interfaces;
+using Bll.Domain.Models;
 
 namespace Bll.Domain.Entities;
 

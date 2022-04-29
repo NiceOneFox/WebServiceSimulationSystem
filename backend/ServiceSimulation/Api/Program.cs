@@ -3,6 +3,7 @@ using Api.Extensions;
 using Bll.Domain.Entities;
 using Bll.Domain.Factories;
 using Bll.Domain.Interfaces;
+using Bll.Domain.Models;
 using Bll.Domain.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,8 +16,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<ISimulationService, SimulationService>();
 
 builder.Services.AddScoped<ITimeProvider, TimeProvider>();
+builder.Services.AddScoped<IFlowProvider, PoissonianFlowProvider>();
+
 builder.Services.AddScoped<IResults, Bll.Domain.Entities.Results>();
-builder.Services.AddScoped<IResultManager, ResultManager>();
 builder.Services.AddScoped<IResultManager, ResultManager>();
 
 builder.Services.AddTransient<IBufferManagerFactory, BufferManagerFactory>();

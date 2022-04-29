@@ -29,6 +29,9 @@ Input parameters:
 - C# 10
 - AutoMapper
 - CORS
+### For testing
+- NUnit
+- Moq
 
 ## Architecture 
 N-Layer Web API

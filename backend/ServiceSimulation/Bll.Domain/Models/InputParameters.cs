@@ -10,5 +10,6 @@ public class InputParameters
     public int AmountOfRequests { get; set; } = 40;
     public double ModelingTime { get; set; } = double.MaxValue;
     public SimulationType SimulationType { get; set; } = SimulationType.Standard;
-    public double Lambda { get; set; } = 3;
+    public double LambdaForRequests { get; set; } = 3;
+    public double LambdaForDevice { get; set; } = 3;
 }

@@ -53,7 +53,7 @@ namespace Bll.Domain.Tests.EntitiesTests
             Assert.NotNull(device.Request);
             Assert.AreEqual(device.Request, request);
             Assert.AreEqual(device.IsWorking, true);
-            Assert.AreEqual(device.TimeOfDeviceWillBeFree, expectedTimeOfDeviceWillBeFree);
+            Assert.That(device.TimeOfDeviceWillBeFree, Is.EqualTo(expectedTimeOfDeviceWillBeFree).Within(0.000001));
         }
     }
 }

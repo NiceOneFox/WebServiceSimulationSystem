@@ -7,14 +7,14 @@ public class DeviceManager : IDeviceManager
 {
     private readonly ITimeProvider _time;
 
-    private readonly IResults _resultChannel;
+    private readonly IResults _results;
 
     private static readonly Random _random = new();
 
-    public DeviceManager(ITimeProvider time, IResults resultChannel)
+    public DeviceManager(ITimeProvider time, IResults results)
     {
         _time = time;
-        _resultChannel = resultChannel;
+        _results = results;
     }
 
     public void TakeRequest(Request request, Device device)
@@ -36,7 +36,7 @@ public class DeviceManager : IDeviceManager
 
         _time.Now = device.Request.EndTime;
 
-        _resultChannel.Processed.Add(device.Request);
+        _results.Processed.Add(device.Request);
 
 
         device.Request = null;

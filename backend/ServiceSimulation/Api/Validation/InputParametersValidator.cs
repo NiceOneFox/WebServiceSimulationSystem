@@ -15,7 +15,7 @@ namespace Api.Validation
             RuleFor(p => p.LambdaForDevice).NotEmpty().ExclusiveBetween(0, 10000);
             RuleFor(p => p.NumberOfSources).NotEmpty().ExclusiveBetween(0, 10000);
             RuleFor(p => p.ModelingTime).NotEmpty().ExclusiveBetween(0, 10000);
-            RuleFor(p => p.SimulationType).IsInEnum();
+            RuleFor(p => p.BufferType).IsInEnum();
         }
     }
 }

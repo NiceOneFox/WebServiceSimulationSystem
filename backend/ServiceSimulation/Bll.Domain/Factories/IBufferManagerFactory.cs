@@ -5,5 +5,5 @@ namespace Bll.Domain.Factories;
 
 public interface IBufferManagerFactory
 {
-    IBufferManager CreateBufferManager(SimulationType simulationType, int capacity);
+    IBufferManager CreateBufferManager(BufferType simulationType, int capacity);
 }

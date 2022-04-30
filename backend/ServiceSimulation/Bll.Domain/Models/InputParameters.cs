@@ -9,7 +9,7 @@ public class InputParameters
     public int BufferSize { get; set; } = 2;
     public int AmountOfRequests { get; set; } = 40;
     public double ModelingTime { get; set; } = double.MaxValue;
-    public SimulationType SimulationType { get; set; } = SimulationType.Standard;
+    public BufferType BufferType { get; set; } = BufferType.FIFO;
     public double LambdaForRequests { get; set; } = 3;
     public double LambdaForDevice { get; set; } = 3;
 }

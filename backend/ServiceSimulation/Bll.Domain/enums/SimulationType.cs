@@ -1,6 +1,7 @@
 ﻿namespace Api.enums;
 
-public enum SimulationType
+public enum BufferType
 {
-    Standard = 0
+    FIFO = 0,
+    LIFO = 1
 }

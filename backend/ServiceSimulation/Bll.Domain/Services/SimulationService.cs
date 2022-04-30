@@ -116,8 +116,6 @@ public class SimulationService : ISimulationService
         else
         {
             // Take request on work or add to buffer.
-            //if (_results.AmountOfGeneratedRequests >= parameters.AmountOfRequests) return;
-
             var newRequestInSystem = _sourceManager.GetNewRequest(sources[indexOfRequestWithClosestTimeCome]);
             // find out free device
             bool wasFreeDevice = false;

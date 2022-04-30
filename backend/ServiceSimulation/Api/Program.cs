@@ -8,15 +8,20 @@ using Bll.Domain.Models;
 using Bll.Domain.Services;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using System.Reflection;
+using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers().AddFluentValidation(fv =>
 {
-    //fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 fv.RegisterValidatorsFromAssemblyContaining<InputParametersValidator>();
 });
+
+#region Logger
+builder.Logging.ClearProviders();
+builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+builder.Host.UseNLog();
+#endregion
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

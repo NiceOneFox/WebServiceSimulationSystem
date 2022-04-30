@@ -31,6 +31,8 @@ Input parameters:
 - AutoMapper
 - FluentValidation
 - CORS
+- NLog
+
 ### For testing
 - NUnit
 - Moq

@@ -8,12 +8,12 @@ namespace Api.Middlewares
     {
         private readonly RequestDelegate _next;
 
-       // private readonly ILogger _logger;
-        public CustomExceptionHandlerMiddleware(RequestDelegate next)//,
-           // ILogger<CustomExceptionHandlerMiddleware> logger)
+        private readonly ILogger _logger;
+        public CustomExceptionHandlerMiddleware(RequestDelegate next,
+            ILogger<CustomExceptionHandlerMiddleware> logger)
         {
             _next = next;
-            //_logger = logger;
+            _logger = logger;
         }
 
         public async Task Invoke(HttpContext context)
@@ -38,7 +38,7 @@ namespace Api.Middlewares
                 case ValidationException validationException:
                     statusCode = HttpStatusCode.BadRequest;
                     result = JsonSerializer.Serialize(validationException.Errors);
-                    //_logger.LogDebug(validationException.Message);
+                    _logger.LogDebug(validationException.Message);
                     break;
 
                 default:

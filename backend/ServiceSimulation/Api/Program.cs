@@ -1,12 +1,27 @@
 using Api.Configuration;
+using Api.Extensions;
+using Api.Validation;
 using Bll.Domain.Entities;
 using Bll.Domain.Factories;
 using Bll.Domain.Interfaces;
+using Bll.Domain.Models;
 using Bll.Domain.Services;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation(fv =>
+{
+fv.RegisterValidatorsFromAssemblyContaining<InputParametersValidator>();
+});
+
+#region Logger
+builder.Logging.ClearProviders();
+builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+builder.Host.UseNLog();
+#endregion
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -14,21 +29,29 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<ISimulationService, SimulationService>();
 
 builder.Services.AddScoped<ITimeProvider, TimeProvider>();
+builder.Services.AddScoped<IFlowProvider, PoissonianFlowProvider>();
+
 builder.Services.AddScoped<IResults, Bll.Domain.Entities.Results>();
 builder.Services.AddScoped<IResultManager, ResultManager>();
-builder.Services.AddScoped<IResultManager, ResultManager>();
-//builder.Services.AddTransient<IBufferManager, StandardBufferManager>();
+
 builder.Services.AddTransient<IBufferManagerFactory, BufferManagerFactory>();
 builder.Services.AddTransient<IDeviceManager, DeviceManager>();
 builder.Services.AddTransient<ISourceManager, SourceManager>();
-//builder.Services.AddScoped<StandardBufferManager>()
-//    .AddScoped<IBufferManager, StandardBufferManager>(s => s.GetRequiredService<StandardBufferManager>());
 
-//builder.Services.AddScoped<IBufferManager>(s =>
-//    ActivatorUtilities.CreateInstance<StandardBufferManager>(s));
+builder.Services.AddTransient<IValidator<InputParameters>, InputParametersValidator>();
 #endregion
 
+#region Mapper
 builder.Services.AddMapper();
+#endregion
+
+#region CORS
+builder.Services.AddCors(opts =>
+{
+    opts.AddPolicy(CorsPolicies.AllowRemoteFrontendWithCredentials);
+});
+#endregion
+
 
 var app = builder.Build();
 
@@ -37,6 +60,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCustomExceptionHandler();
 
 app.UseHttpsRedirection();
 

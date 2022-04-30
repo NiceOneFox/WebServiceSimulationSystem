@@ -1,28 +1,28 @@
 ﻿using Bll.Domain.Interfaces;
+using Bll.Domain.Models;
 
 namespace Bll.Domain.Entities;
 
 public class SourceManager : ISourceManager
 {
     private readonly ITimeProvider _time;
-
+    private readonly IFlowProvider _flow;
     private readonly IResults _results;
 
-    private static Random _random = new();
-
-    public SourceManager(ITimeProvider time, IResults results)
+    public SourceManager(ITimeProvider time, IFlowProvider flowProvider, IResults results)
     {
         _time = time;
+        _flow = flowProvider;
         _results = results;
     }
 
-    public Request GetNewRequest(Source source)
+    public Request GetNewRequest(Source source) // THIS METHOD HAVE TO RETURN CURRENT Request and generate new? but cause problem with amount of generated and served requests
     {
-        var generatedRequest = new Request(source.SourceId, source.SerialNumber, source.TimeOfNextRequest, -1);
-        
-        source.TimeOfNextRequest += -(1.0 / source.Lambda) * Math.Log(_random.NextDouble());
+        var generatedRequest = new Request(source.SourceId, source.SerialNumber, source.TimeOfNextRequest, null);
+
+        source.TimeOfNextRequest = _flow.GetInterval(source.TimeOfNextRequest, source.Lambda);
         source.SerialNumber++;
-        generatedRequest.SerialNumberOfSource = source.SerialNumber; // TODO REFACTOR? 
+        generatedRequest.SerialNumberOfSource = source.SerialNumber;
 
         _time.Now = source.TimeOfNextRequest;
         _results.AmountOfGeneratedRequests++;

@@ -1,8 +1,9 @@
 ﻿using Api.Entities;
-using Api.enums;
+using Api.Validation;
 using AutoMapper;
-using Bll.Domain.Entities;
 using Bll.Domain.Interfaces;
+using Bll.Domain.Models;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -31,6 +32,8 @@ public class Simulation : Controller
     [HttpGet("/start")]
     public IActionResult Start(InputParameters parameters)
     {
+        new InputParametersValidator().ValidateAndThrow(parameters);
+
         _simulationService.StartSimulation(parameters);
         var endResultsOfModeling = _resultManager.CalculateResultsOfModeling();
         var apiResults = _mapper.Map<ApiResults>((endResultsOfModeling, _results));

@@ -1,7 +1,6 @@
 ﻿using Api.enums;
 using Bll.Domain.Factories;
 using Bll.Domain.Interfaces;
-using Castle.DynamicProxy;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Bll.Domain.Entities;
@@ -15,12 +14,15 @@ public class BufferManagerFactory : IBufferManagerFactory
         _serviceProvider = serviceProvider;
     }
 
-    public IBufferManager CreateBufferManager(SimulationType simulationType, int capacity)
+    public IBufferManager CreateBufferManager(BufferType bufferType, int capacity)
     {
-        return simulationType switch
+        return bufferType switch
         {
-            0 => new StandardBufferManager(_serviceProvider.GetRequiredService<IResults>(),
+            BufferType.FIFO => new StandardBufferManager(_serviceProvider.GetRequiredService<IResults>(),
                 _serviceProvider.GetRequiredService<ITimeProvider>(), capacity),
+            BufferType.LIFO => new LIFOBufferManager(_serviceProvider.GetRequiredService<IResults>(),
+                _serviceProvider.GetRequiredService<ITimeProvider>(), capacity),
+
             _ => throw new NotImplementedException()
         };
     }

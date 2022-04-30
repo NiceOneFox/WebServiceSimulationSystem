@@ -1,4 +1,5 @@
 ﻿using Bll.Domain.Interfaces;
+using Bll.Domain.Models;
 
 namespace Bll.Domain.Entities;
 
@@ -10,7 +11,7 @@ public class StandardBufferManager : IBufferManager
 
     private readonly LinkedList<Request> _requests = new();
 
-    public int Capacity = 4;
+    public readonly int Capacity = 4;
 
     public StandardBufferManager(IResults resultChannel, ITimeProvider time, int capacity)
     {

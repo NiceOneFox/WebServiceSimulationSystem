@@ -22,12 +22,20 @@ Input parameters:
 * Amount of requests
 * Modeling time (max time)
 * SimulationType (Type of buffer modeling, FIFO, LIFO etc.)
-* Lambda (amount of flow) parameter for Poissonian flow
+* Lambda for devices (amount of flow) parameter for Poissonian flow
+* Lambda for sources
 
 ## Technologies
 - ASP .NET 6
 - C# 10
 - AutoMapper
+- FluentValidation
+- CORS
+- NLog
+
+### For testing
+- NUnit
+- Moq
 
 ## Architecture 
 N-Layer Web API

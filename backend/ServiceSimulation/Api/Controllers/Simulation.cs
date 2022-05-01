@@ -30,11 +30,11 @@ public class Simulation : Controller
     }
 
     [HttpGet("/start")]
-    public IActionResult Start(InputParameters parameters)
+    public async Task<IActionResult> Start(InputParameters parameters)
     {
         new InputParametersValidator().ValidateAndThrow(parameters);
 
-        _simulationService.StartSimulation(parameters);
+        await _simulationService.StartSimulation(parameters);
         var endResultsOfModeling = _resultManager.CalculateResultsOfModeling();
         var apiResults = _mapper.Map<ApiResults>((endResultsOfModeling, _results));
 

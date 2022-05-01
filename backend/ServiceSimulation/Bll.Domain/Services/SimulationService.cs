@@ -24,7 +24,7 @@ public class SimulationService : ISimulationService
         _time = time;
     }
 
-    public void StartSimulation(InputParameters parameters)
+    public Task StartSimulation(InputParameters parameters)
     {
         #region initialize
         var sources = new List<Source>(parameters.NumberOfSources);
@@ -74,6 +74,7 @@ public class SimulationService : ISimulationService
             }
             FindNextSpecialEvent(devices, sources, bufferManager, parameters);
         }
+        return Task.CompletedTask;
     }
 
     private void FindNextSpecialEvent(List<Device> devices, List<Source> sources, IBufferManager bufferManager, InputParameters parameters)

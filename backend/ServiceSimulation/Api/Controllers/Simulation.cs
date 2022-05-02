@@ -34,7 +34,7 @@ public class Simulation : Controller
     {
         new InputParametersValidator().ValidateAndThrow(parameters);
 
-        await _simulationService.StartSimulation(parameters);
+        await _simulationService.StartSimulationAsync(parameters);
         var endResultsOfModeling = _resultManager.CalculateResultsOfModeling();
         var apiResults = _mapper.Map<ApiResults>((endResultsOfModeling, _results));
 

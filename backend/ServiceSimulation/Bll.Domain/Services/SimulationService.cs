@@ -24,7 +24,7 @@ public class SimulationService : ISimulationService
         _time = time;
     }
 
-    public Task StartSimulation(InputParameters parameters)
+    public Task StartSimulationAsync(InputParameters parameters)
     {
         #region initialize
         var sources = new List<Source>(parameters.NumberOfSources);

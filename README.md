@@ -26,6 +26,7 @@ Input parameters:
 * Lambda for sources
 
 ## Technologies
+### Backend
 - ASP .NET 6
 - C# 10
 - AutoMapper
@@ -37,9 +38,14 @@ Input parameters:
 - NUnit
 - Moq
 
+### Frontend
+- Angular
+
 ## Architecture 
 N-Layer Web API
 
 ## Used Design Patterns
 1. Factory Pattern (Concrete implementation is chosen by input parameter)
-2. Dependency Injection (DI)
+2. Builder Pattern (For constructing of algorithm)
+3. Dependency Injection (DI)
+

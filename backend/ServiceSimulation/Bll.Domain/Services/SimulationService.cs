@@ -1,6 +1,6 @@
-﻿using Bll.Domain.Models;
-using Bll.Domain.Factories;
+﻿using Bll.Domain.Factories;
 using Bll.Domain.Interfaces;
+using Bll.Domain.Models;
 
 namespace Bll.Domain.Services;
 
@@ -12,11 +12,11 @@ public class SimulationService : ISimulationService
     private readonly IDeviceDirectorFactory _deviceDirectorFactory;
     private readonly IResults _results;
     private readonly ITimeProvider _time;
-    public SimulationService(ISourceManager sourceManager, 
-        IDeviceManager deviceManager, 
+    public SimulationService(ISourceManager sourceManager,
+        IDeviceManager deviceManager,
         IBufferManagerFactory bufferManagerFactory,
         IDeviceDirectorFactory deviceDirectorFactory,
-        IResults results, 
+        IResults results,
         ITimeProvider time)
     {
         _sourceManager = sourceManager;
@@ -70,9 +70,9 @@ public class SimulationService : ISimulationService
         {
             if (_results.AmountOfGeneratedRequests >= parameters.AmountOfRequests &&
                 bufferManager.IsFree() &&
-                IsAllDevicesFree(devices) || 
+                IsAllDevicesFree(devices) ||
                 _time.Now >= parameters.ModelingTime)
-               // _results.AmountOfServedRequest == parameters.AmountOfRequests) // TODO CHECK FOR REQUESTS ON SOURCES. WHEN TO END SYSTEM MODELING
+            // _results.AmountOfServedRequest == parameters.AmountOfRequests) // TODO CHECK FOR REQUESTS ON SOURCES. WHEN TO END SYSTEM MODELING
             {
                 break;
             }
@@ -80,7 +80,7 @@ public class SimulationService : ISimulationService
         }
     }
 
-    private void FindNextSpecialEvent(List<Device> devices, List<Source> sources, IBufferManager bufferManager, 
+    private void FindNextSpecialEvent(List<Device> devices, List<Source> sources, IBufferManager bufferManager,
         IDeviceDirector deviceDirector, InputParameters parameters)
     {
         double timeOfClosestRequestCome = double.MaxValue;
@@ -89,7 +89,7 @@ public class SimulationService : ISimulationService
         int indexOfRequestWithClosestTimeCome = -1;
         for (int i = 0; i < sources.Count; i++)
         {
-           // if (_results.AmountOfGeneratedRequests >= parameters.AmountOfRequests) break;
+            // if (_results.AmountOfGeneratedRequests >= parameters.AmountOfRequests) break;
             if (sources[i].TimeOfNextRequest < timeOfClosestRequestCome)
             {
                 timeOfClosestRequestCome = sources[i].TimeOfNextRequest;
@@ -107,7 +107,7 @@ public class SimulationService : ISimulationService
             }
         }
 
-        if (timeOfClosestDeviceFree < timeOfClosestRequestCome 
+        if (timeOfClosestDeviceFree < timeOfClosestRequestCome
             || _results.AmountOfGeneratedRequests == parameters.AmountOfRequests)
         {
             _deviceManager.FreeDevice(devices[indexOfDeviceWithClosestTimeFree]);
@@ -129,7 +129,7 @@ public class SimulationService : ISimulationService
             if (freeDevice is not null)
             {
                 _deviceManager.TakeRequest(newRequestInSystem, freeDevice);
-            } 
+            }
             else
             {
                 bufferManager.Add(newRequestInSystem);

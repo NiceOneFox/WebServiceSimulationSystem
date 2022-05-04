@@ -1,6 +1,4 @@
-﻿using Bll.Domain.Entities;
-
-namespace Api.Entities;
+﻿namespace Api.Entities;
 
 public record ApiResults
 {

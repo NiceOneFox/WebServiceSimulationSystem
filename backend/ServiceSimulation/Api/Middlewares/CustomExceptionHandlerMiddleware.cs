@@ -1,6 +1,6 @@
-﻿using System.Net;
+﻿using FluentValidation;
+using System.Net;
 using System.Text.Json;
-using FluentValidation;
 
 namespace Api.Middlewares
 {

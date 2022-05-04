@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers().AddFluentValidation(fv =>
 {
-fv.RegisterValidatorsFromAssemblyContaining<InputParametersValidator>();
+    fv.RegisterValidatorsFromAssemblyContaining<InputParametersValidator>();
 });
 
 #region Logger

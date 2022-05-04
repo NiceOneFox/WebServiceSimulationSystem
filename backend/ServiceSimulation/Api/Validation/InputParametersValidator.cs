@@ -1,6 +1,5 @@
-﻿using FluentValidation;
-using Bll.Domain.Models;
-using Api.enums;
+﻿using Bll.Domain.Models;
+using FluentValidation;
 
 namespace Api.Validation
 {

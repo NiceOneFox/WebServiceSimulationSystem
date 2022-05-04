@@ -4,5 +4,5 @@ namespace Bll.Domain.Interfaces;
 
 public interface ISimulationService
 {
-    void StartSimulation(InputParameters parameters);
+    Task StartSimulationAsync(InputParameters parameters);
 }

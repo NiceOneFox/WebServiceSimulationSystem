@@ -21,7 +21,8 @@ Input parameters:
 * Buffer capacity
 * Amount of requests
 * Modeling time (max time)
-* SimulationType (Type of buffer modeling, FIFO, LIFO etc.)
+* BufferType (Type of buffer modeling, FIFO, LIFO etc.)
+* DeviceDirector (Type of choosing free device, circle etc.)
 * Lambda for devices (amount of flow) parameter for Poissonian flow
 * Lambda for sources
 

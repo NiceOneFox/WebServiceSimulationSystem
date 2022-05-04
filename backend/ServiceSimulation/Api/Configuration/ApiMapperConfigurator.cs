@@ -1,7 +1,7 @@
 ﻿using Api.Entities;
 using AutoMapper;
-using Bll.Domain.Models;
 using Bll.Domain.Interfaces;
+using Bll.Domain.Models;
 
 namespace Api.Configuration;
 

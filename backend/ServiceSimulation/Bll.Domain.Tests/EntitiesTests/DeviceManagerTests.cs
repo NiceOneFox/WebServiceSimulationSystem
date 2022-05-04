@@ -1,11 +1,11 @@
-﻿using System.Linq;
+﻿using Bll.Domain.Entities;
 using Bll.Domain.Interfaces;
-using Bll.Domain.Entities;
+using Bll.Domain.Models;
 using Moq;
 using NUnit.Framework;
-using Bll.Domain.Models;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Bll.Domain.Tests.EntitiesTests
 {
@@ -105,7 +105,7 @@ namespace Bll.Domain.Tests.EntitiesTests
             var deviceManager = new DeviceManager(_time.Object, _flow.Object, _results.Object);
             //Act
             //Assert
-            Assert.Throws<ArgumentNullException> (() => deviceManager.FreeDevice(device));
+            Assert.Throws<ArgumentNullException>(() => deviceManager.FreeDevice(device));
         }
     }
 }

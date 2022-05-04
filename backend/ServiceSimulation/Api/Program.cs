@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers().AddFluentValidation(fv =>
 {
-fv.RegisterValidatorsFromAssemblyContaining<InputParametersValidator>();
+    fv.RegisterValidatorsFromAssemblyContaining<InputParametersValidator>();
 });
 
 #region Logger
@@ -37,6 +37,7 @@ builder.Services.AddScoped<IResultManager, ResultManager>();
 builder.Services.AddTransient<IBufferManagerFactory, BufferManagerFactory>();
 builder.Services.AddTransient<IDeviceManager, DeviceManager>();
 builder.Services.AddTransient<ISourceManager, SourceManager>();
+builder.Services.AddTransient<IDeviceDirectorFactory, DeviceDirectorFactory>();
 
 builder.Services.AddTransient<IValidator<InputParameters>, InputParametersValidator>();
 #endregion

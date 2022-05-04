@@ -129,7 +129,6 @@ public class SimulationService : ISimulationService
             var newRequestInSystem = algorithm.sourceManager.GetNewRequest(sources[indexOfRequestWithClosestTimeCome]);
 
             // find out free device
-
             var freeDevice = algorithm.deviceDirector.ChooseDevice(devices, _deviceManager); // init deviceDirector with devicemanager
 
             if (freeDevice is not null)

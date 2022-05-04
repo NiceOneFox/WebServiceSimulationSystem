@@ -1,4 +1,5 @@
-﻿using Bll.Domain.Factories;
+﻿using Bll.Domain.Entities;
+using Bll.Domain.Factories;
 using Bll.Domain.Interfaces;
 using Bll.Domain.Models;
 
@@ -129,7 +130,7 @@ public class SimulationService : ISimulationService
 
             // find out free device
 
-            var freeDevice = deviceDirector.ChooseDevice(devices, _deviceManager); // init deviceDirector with devicemanager
+            var freeDevice = algorithm.deviceDirector.ChooseDevice(devices, _deviceManager); // init deviceDirector with devicemanager
 
             if (freeDevice is not null)
             {
